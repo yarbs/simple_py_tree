@@ -32,7 +32,7 @@ def print_dir_tree(filepath: str, file_type_prefix: bool = False) -> None:
         return dirs, files, links
 
     def walk(root, dirs, files, prefix: str = '', file_type: bool = False):
-        """
+        """ Walk, Print all files in the working directory
 
         :param root: current working directory
         :param dirs: subdirectories under current working directory
@@ -44,18 +44,14 @@ def print_dir_tree(filepath: str, file_type_prefix: bool = False) -> None:
         if files:
             if file_type:
                 file_prefix = prefix + ('   f--- ' if dirs else ' ') + ''
+                dir_prefix, walk_prefix = prefix + '   [d]--- ', prefix + '     f---'
+
             else:
                 file_prefix = prefix + ('   |--- ' if dirs else ' ') + ''
+                dir_prefix, walk_prefix = prefix + '   [+]--- ', prefix + '     |---'
 
         for name in files:
             print(file_prefix + name)
-
-        # SET PREFIX FOR DIRS AND FILES WITHIN
-        # ---------------------------------------
-        if file_type:
-            dir_prefix, walk_prefix = prefix + '   [d]--- ', prefix + '     f---'
-        else:
-            dir_prefix, walk_prefix = prefix + '   [+]--- ', prefix + '     |---'
 
         for name in dirs:
             print(dir_prefix + name.upper())
